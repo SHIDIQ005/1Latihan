@@ -1,0 +1,24 @@
+name: Automasi Testing Sebelum Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  uji:
+    runs-on: windows-latest
+
+    steps:
+      - name: Ambil Kode Repositori
+        uses: actions/checkout@v4
+
+      - name: Instal HTMLHint & Stylelint
+        run: |
+          npm install -g htmlhint stylelint
+
+      - name: Periksa Kode HTML
+        run: htmlhint "**/*.html"
+
+      - name: Periksa Kode CSS
+        run: stylelint "**/*.css"
